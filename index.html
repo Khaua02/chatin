@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewpot" content="width=device-width, initial-scale=1.0">
+        <title>chat pika</title>
+        
+    </head>
+    <body>
+        <main>
+            <h2>🌟 Bem-vindo ao Chat dos Pika! 🌟</h2>
+            <style>
+                  main {
+            padding: 15px;
+            text-align: center;
+            color: rgb(255, 255, 255);
+           text-align: center;
+        }
+            </style>
+            </main>
+            <p>Aqui é o lugar perfeito para trocar ideias, se divertir e conectar-se com pessoas incríveis! 🎉</p>
+            <p>Sinta-se à vontade para explorar, compartilhar suas opiniões e participar das conversas.</p>
+            <p>Nosso objetivo é garantir que você tenha uma experiência incrível, cheia de aprendizado, risadas e boas histórias. 😄</p>
+            <p>Estamos animados em ter você aqui! 💬</p>
+            <p>👉 Regras rápidas:</p>
+            <p>1️⃣ Respeite todos os participantes.</p>
+            <p>2️⃣ Mantenha o clima positivo e amigável.</p>
+            <P>3️⃣ Divirta-se! 🎊</P>
+            <P>Vamos começar?</P>
+        
+    <!--area fundo-->
+
+   <main>
+    <style>
+        body {
+            background-color: #000000; /* Azul claro */
+            color: #ffffff; /* Cor do texto */
+            font-family: Arial, sans-serif;
+        }
+    </style>
+    </main>
+
+<!--area do chat-->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #000000;
+    }
+
+    /* Estilo do botão */
+    #openChatButton {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        font-size: 16px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #openChatButton:hover {
+        background-color: #0056b3;
+    }
+
+    /* Estilo da janela de chat */
+    #chatWindow {
+        display: none; /* Escondido por padrão */
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        width: 300px;
+        height: 400px;
+        background-color: rgb(0, 0, 0);
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    #chatHeader {
+        background-color: #007BFF;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    #chatMessages {
+        padding: 10px;
+        height: 300px;
+        overflow-y: auto;
+        font-size: 14px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    #chatInput {
+        display: flex;
+        padding: 10px;
+        background-color: #f9f9f9;
+    }
+
+    #chatInput input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    #chatInput button {
+        padding: 10px;
+        margin-left: 5px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #chatInput button:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+
+<button id="openChatButton">Abrir Chat</button>
+
+<div id="chatWindow">
+    <div id="chatHeader">Chat de Piadas</div>
+    <div id="chatMessages">
+        <p><strong>Bot:</strong> Olá! Quer ouvir uma piada?</p>
+    </div>
+    <div id="chatInput">
+        <input type="text" id="userMessage" placeholder="Digite sua mensagem...">
+        <button id="sendMessage">Enviar</button>
+    </div>
+</div>
+
+<script>
+    // Botões e elementos
+    const openChatButton = document.getElementById('openChatButton');
+    const chatWindow = document.getElementById('chatWindow');
+    const chatMessages = document.getElementById('chatMessages');
+    const userMessageInput = document.getElementById('userMessage');
+    const sendMessageButton = document.getElementById('sendMessage');
+
+    // Lista de piadas
+    const jokes = [
+        "Por que o livro de matemática ficou triste? Porque tinha muitos problemas!",
+        "O que o zero disse para o oito? Que cinto bonito!",
+        "Por que a foto foi presa? Porque foi enquadrada!",
+        "O que é um pontinho amarelo no céu? Um fandango voador!",
+        "Qual é o animal mais antigo? A zebra, porque é em preto e branco!",
+        "O que a abelha disse para a flor? Você é um amorzinho!",
+        "Qual é o cúmulo da distração? Colocar um copo de água no micro-ondas para esquentar o gelo.",
+        "O que o papel disse para a caneta? Vamos escrever a nossa história.",
+        "Como o livro se despediu do filme? Dizia: 'Até a próxima edição!'",
+        "Por que o computador foi ao médico? Porque estava com vírus!",
+        "Você sabe qual é o cúmulo do desperdício? Comprar um balde sem fundo.",
+        "O que a galinha falou para o ovo? Você veio primeiro ou eu?",
+        "O que a árvore disse para o tronco? Estou com raízes saudáveis!",
+        "Por que o pombo não usa Facebook? Porque ele já tem Twitter!",
+        "O que aconteceu com o livro de geografia? Ele se perdeu!",
+        "Qual é o animal mais saudável? O coelho, porque vive comendo cenouras!",
+        "Como o leite se despediu do café? Até logo, estou indo para o refrigerador!",
+        "Qual é a fruta que mais fala? A laranja, porque adora dar papo!",
+        "Por que o esqueleto não brigou com o outro? Porque ele não tinha coragem!",
+        "O que o lápis falou para o papel? Vamos escrever juntos!"
+    ];
+
+    // Função para exibir mensagens
+    function displayMessage(sender, message) {
+        const messageElement = document.createElement('p');
+        messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Rolar para a última mensagem
+    }
+
+    // Função para responder com uma piada aleatória
+    function getRandomJoke() {
+        const randomIndex = Math.floor(Math.random() * jokes.length);
+        return jokes[randomIndex];
+    }
+
+    // Abrir ou fechar o chat
+    openChatButton.addEventListener('click', () => {
+        chatWindow.style.display = chatWindow.style.display === 'none' || chatWindow.style.display === '' 
+            ? 'block' 
+            : 'none';
+    });
+
+    // Enviar mensagem
+    sendMessageButton.addEventListener('click', () => {
+        const userMessage = userMessageInput.value.trim();
+        if (userMessage) {
+            // Exibir mensagem do usuário
+            displayMessage('Você', userMessage);
+
+            // Se o usuário pedir uma piada, o bot responde com uma piada aleatória
+            if (userMessage.toLowerCase().includes('piada')) {
+                const botResponse = getRandomJoke();
+                displayMessage('Bot', botResponse);
+            } else {
+                // Resposta padrão do bot
+                displayMessage('Bot', 'Eu só conto piadas! Quer ouvir uma piada?');
+            }
+
+            // Limpar input
+            userMessageInput.value = '';
+        }
+    });
+
+    // Enviar mensagem ao pressionar Enter
+    userMessageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendMessageButton.click();
+        }
+    });
+</script>
+<!-- jogo de pergunta,porra-->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #000000;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: #ffa200;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    .question {
+        margin: 20px 0;
+        font-size: 18px;
+        color: #444;
+    }
+
+    .options button {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .options button:hover {
+        background-color: #0056b3;
+    }
+
+    #result {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #28a745;
+        display: none;
+    }
+
+    #prize {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #444;
+        display: none;
+    }
+
+    #prize a {
+        color: #007BFF;
+        text-decoration: none;
+    }
+
+    #prize a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Jogo de Perguntas</h1>
+    <div id="quiz">
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+    </div>
+    <div id="result"></div>
+    <div id="prize">
+        🎉 Parabéns! Aqui está seu prêmio: 
+        <a href="https://youtu.be/iSLwVaebsJg?si=PbPn_EGBWK2HvNnW" target="_blank">Clique aqui para assistir ao vídeo!</a>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        {
+            question: "Qual é a capital do Brasil?",
+            options: ["Rio de Janeiro", "Chat da Pika", "Espirito Santo", "Salvador"],
+            correct: 1
+        },
+        {
+            question: "Qual a porra da √π*2?",
+            options: ["3,14", "3,54", "14,43", "16,23"],
+            correct: 1
+        },
+        {
+            question: "Qual é o maior planeta do sistema solar?",
+            options: ["Terra", "Marte", "Bucetoides", "Vênus"],
+            correct: 2
+        },
+        {
+            question: "Qual é o elemento químico representado pelo símbolo 'O'?",
+            options: ["Ouro", "Osama binlada", "Osmium", "Ósmio"],
+            correct: 1
+        },
+        {
+            question: "Quem escreveu 'Dom Casmurro'?",
+            options: ["Jorge Amado", "Machado de Assis", "Clarice Lispector", "Monteiro Lobato"],
+            correct: 1
+        },
+        {
+            question: "Qual é a fórmula química da água?",
+            options: ["Pitu", "CO2", "O2", "H2SO4"],
+            correct: 0
+        }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionElement = document.getElementById("question");
+    const optionsElement = document.getElementById("options");
+    const resultElement = document.getElementById("result");
+    const prizeElement = document.getElementById("prize");
+
+    function loadQuestion() {
+        const currentQuiz = quizData[currentQuestion];
+        questionElement.textContent = currentQuiz.question;
+        optionsElement.innerHTML = "";
+
+        currentQuiz.options.forEach((option, index) => {
+            const button = document.createElement("button");
+            button.textContent = option;
+            button.onclick = () => checkAnswer(index);
+            optionsElement.appendChild(button);
+        });
+    }
+
+    function checkAnswer(selected) {
+        const correct = quizData[currentQuestion].correct;
+        if (selected === correct) {
+            score++;
+        }
+
+        currentQuestion++;
+
+        if (currentQuestion < quizData.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }
+
+    function showResult() {
+        questionElement.style.display = "none";
+        optionsElement.style.display = "none";
+
+        if (score === quizData.length) {
+            resultElement.textContent = "Você acertou todas, usou o google ne capiroto";
+            resultElement.style.color = "#28a745";
+            prizeElement.style.display = "block";
+        } else {
+            resultElement.textContent = `burro burro ${score} de ${quizData.length} perguntas. Tente novamente para ganhar o prêmio!, atualize para reiniciar`;
+            resultElement.style.color = "#dc3545";
+        }
+
+        resultElement.style.display = "block";
+    }
+
+    loadQuestion();
+</script>
+
+
+        <footer>
+            <p>&copy; Chat pika - 2024</p>
+            <p>Chat dos pika</p>
+        </footer>
+    </body>
+</html>
